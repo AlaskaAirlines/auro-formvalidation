@@ -1,5 +1,3 @@
-## Validation Results
-
 When validation is executed the `validity` and `helpText` will be determined.
 
 ### Validity
@@ -18,7 +16,7 @@ patternMismatch: Returns true if the value does not match the specified pattern,
 
 ### Help/Error Text
 
-When the `validity` is not `valid`, the help text will display an error message. For components with an input, this message will default to using the message supplied by the browswer for the HTML5 input. This may be replaced with a custom message. For all other components, the validity message must be provided.
+When the `validity` is not `valid`, the help text will display an error message. For components with an input, this message will default to using the message supplied by the browser for the HTML5 input. This may be replaced with a custom message. For all other components, the validity message must be provided.
 
 To set a custom message reference the table below and provide a string.
 

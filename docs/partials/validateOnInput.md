@@ -1,1 +1,1 @@
-For form elements that contain an input element _(e.g. `aro-input`, `auro-comobobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.
+For form elements that contain an input element _(e.g. `auro-input`, `auro-combobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.

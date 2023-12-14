@@ -95,12 +95,12 @@ Validation should execute at the following times:
 - On `blur` event
 
 
-When adding validation to a form element component, event listeners must be added for these events and on `updated` for the changede properties.
+When adding validation to a form element component, event listeners must be added for these events and on `updated` for the changed properties.
 <!-- AURO-GENERATED-CONTENT:END -->
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=validateOnInput.md) -->
 <!-- The below content is automatically added from validateOnInput.md -->
-For form elements that contain an input element _(e.g. `aro-input`, `auro-comobobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.
+For form elements that contain an input element _(e.g. `auro-input`, `auro-combobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.
 <!-- The below content is automatically added from executesWhen.md -->
 <!-- AURO-GENERATED-CONTENT:END -->
 

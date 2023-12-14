@@ -20,7 +20,7 @@ Validation allows for setting the following optional requirements on a form elem
 - `min` and `max`: Specifies the minimum and maximum values of numerical input types.
 - `type`: Specifies whether the data needs to be a number, an email address, or some other specific preset type.
 - `pattern`: Specifies a regular expression that defines a pattern the entered data needs to follow.
-- `error`: Forces the validation state to be _invalid_ and defines the custom validation messeage to display.
+- `error`: Forces the validation state to be _invalid_ and defines the custom validation message to display.
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Setup validation in a new component
@@ -124,11 +124,11 @@ Validation should execute at the following times:
 - `error` is changed
 - On `blur` event
 
-When adding validation to a form element component, event listeners must be added for these events and on `updated` for the changede properties.
+When adding validation to a form element component, event listeners must be added for these events and on `updated` for the changed properties.
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=validateOnInput.md) -->
 <!-- The below content is automatically added from validateOnInput.md -->
-For form elements that contain an input element _(e.g. `aro-input`, `auro-comobobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.
+For form elements that contain an input element _(e.g. `auro-input`, `auro-combobox`, `auro-datepicker`)_, the `validateOnInput` attribute may be applied. When `true`, the component will execute with each character change to the input.
 <!-- The below content is automatically added from executesWhen.md -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -155,9 +155,6 @@ validate() {
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../partials/validationResults.md) -->
 <!-- The below content is automatically added from ./../partials/validationResults.md -->
-
-## Validation Results
-
 When validation is executed the `validity` and `helpText` will be determined.
 
 ### Validity
@@ -176,7 +173,7 @@ patternMismatch: Returns true if the value does not match the specified pattern,
 
 ### Help/Error Text
 
-When the `validity` is not `valid`, the help text will display an error message. For components with an input, this message will default to using the message supplied by the browswer for the HTML5 input. This may be replaced with a custom message. For all other components, the validity message must be provided.
+When the `validity` is not `valid`, the help text will display an error message. For components with an input, this message will default to using the message supplied by the browser for the HTML5 input. This may be replaced with a custom message. For all other components, the validity message must be provided.
 
 To set a custom message reference the table below and provide a string.
 

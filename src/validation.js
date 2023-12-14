@@ -55,7 +55,6 @@ export class AuroFormValidation {
   validateType(elem) {
     if (elem.hasAttribute('type')) {
       if (elem.type === 'email') {
-        // BUG - Need more accurate email regex | this one validates slightly different than the default html5 one
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; // eslint-disable-line require-unicode-regexp
 
         if (!elem.value.match(emailRegex)) {
