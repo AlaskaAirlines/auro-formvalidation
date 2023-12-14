@@ -194,7 +194,7 @@ export class AuroFormValidation {
   }
 
   /**
-   *Gets all the HTML5 `inputs` in the element shadow DOM.
+   * Gets all the HTML5 `inputs` in the element shadow DOM.
    * @private
    * @param {object} elem - HTML element to validate.
    * @returns {void}
@@ -248,7 +248,6 @@ export class AuroFormValidation {
       elem.errorMessage = undefined;
     }
 
-    // Not sure if we still need this.
     elem.dispatchEvent(new CustomEvent(`${this.getCamelCaseName(elem)}-helpText`, {
       bubbles: true,
       composed: true,

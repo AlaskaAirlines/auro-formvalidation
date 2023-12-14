@@ -1,11 +1,11 @@
 name: General support
 description: Suggestions that are not related to bugs or new features
-title: 'auro-library: [issue]'
+title: 'auro-formvalidation: [issue]'
 labels:
   - 'Type: Question'
   - 'Type: Feature'
   - not-reviewed
-  - 'auro-library'
+  - 'auro-formvalidation'
 body:
   - type: textarea
     id: request

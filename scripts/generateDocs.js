@@ -1,16 +1,12 @@
+/* eslint-disable */
+
 const path = require('path');
 const markdownMagic = require('markdown-magic');
 const fs = require('fs');
-// const https = require('https');
-
-// const readmeTemplateUrl = 'https://raw.githubusercontent.com/AlaskaAirlines/WC-Generator/master/componentDocs/README.md';
-const dirDocTemplates = './docTemplates';
-const readmeFilePath = dirDocTemplates + '/README.md';
 
 /**
  * Extract NPM, NAMESPACE and NAME from package.json
  */
-
 function nameExtraction() {
   const packageJson = fs.readFileSync('package.json', 'utf8', function(err, data) {
     if (err) {
@@ -38,7 +34,6 @@ function nameExtraction() {
 /**
  * Replace all instances of [npm], [name], [Name], [namespace] and [Namespace] accordingly
  */
-
 function formatTemplateFileContents(content, destination) {
   let nameExtractionData = nameExtraction();
   let result = content;
@@ -53,7 +48,7 @@ function formatTemplateFileContents(content, destination) {
   result = result.replace(/\[Namespace]/g, nameExtractionData.namespaceCap);
 
   /**
-   * Cleanup line breaks
+   * Cleanup line breaks.
    */
   result = result.replace(/(\r\n|\r|\n)[\s]+(\r\n|\r|\n)/g, '\r\n\r\n'); // Replace lines containing only whitespace with a carriage return.
   result = result.replace(/>(\r\n|\r|\n){2,}/g, '>\r\n'); // Remove empty lines directly after a closing html tag.
@@ -62,7 +57,7 @@ function formatTemplateFileContents(content, destination) {
   result = result.replace(/([^(\r\n|\r|\n)])(\r\n|\r|\n)+#/g, "$1\r\n\r\n#"); // Ensure empty line before header sections.
 
   /**
-   * Write the result to the destination file
+   * Write the result to the destination file.
    */
   fs.writeFileSync(destination, result, { encoding: 'utf8'});
 };
@@ -85,78 +80,14 @@ function formatApiTableContents(content, destination) {
   });
 }
 
-/**
- * Compiles `./docTemplates/README.md` -> `./README.md`
- */
-
-// function processReadme() {
-//   const callback = function(updatedContent, outputConfig) {
-
-//     if (fs.existsSync('./README.md')) {
-//       fs.readFile('./README.md', 'utf8', function(err, data) {
-//         formatTemplateFileContents(data, './README.md');
-//       });
-//     } else {
-//       console.log('ERROR: ./README.md file is missing');
-//     }
-//   };
-
-//   const config = {
-//     matchWord: 'AURO-GENERATED-CONTENT',
-//     outputDir: './'
-//   };
-
-//   const markdownPath = path.join(__dirname, '../docTemplates/README.md');
-
-//   markdownMagic(markdownPath, config, callback);
-// }
 
 /**
  * Compiles `./docs/partials/index.md` -> `./demo/index.md`
  */
-
-// function processDocParts() {
-//   const callback = function(updatedContent, outputConfig) {
-//     if (fs.existsSync('./demo/index.md')) {
-//       fs.readFile('./demo/index.md', 'utf8', function(err, data) {
-//         formatTemplateFileContents(data, './demo/index.md');
-//       });
-//     } else {
-//       console.log('ERROR: ./demo/index.md file is missing');
-//     }
-//   };
-
-//   const configDemo = {
-//     matchWord: 'AURO-GENERATED-CONTENT',
-//     outputDir: './demo'
-//   };
-
-//   const markdownPath = path.join(__dirname, '../docs/partials/index.md');
-
-//   markdownMagic(markdownPath, configDemo, callback);
-// }
-
-/**
- * Compiles `./docs/partials/index.md` -> `./demo/index.md`
- */
-
 function processPartials() {
-  // const callback = function(updatedContent, outputConfig) {
-  //   if (fs.existsSync('./demo/index.md')) {
-  //     fs.readFile('./demo/index.md', 'utf8', function(err, data) {
-  //       formatTemplateFileContents(data, './demo/index.md');
-  //     });
-  //   } else {
-  //     console.log('ERROR: ./demo/index.md file is missing');
-  //   }
-  // };
-
   const configDemo = {
     matchWord: 'AURO-GENERATED-CONTENT'
   };
-
-  // ,
-  //   outputDir: './demo'
 
   const markdownPath = path.join(__dirname, '../docs/partials/usingValidation.md');
 
@@ -166,7 +97,6 @@ function processPartials() {
 /**
  * Compiles `./docs/partials/index.md` -> `./demo/index.md`
  */
-
 function processDemo() {
   const callback = function(updatedContent, outputConfig) {
     if (fs.existsSync('./demo/index.md')) {
@@ -188,66 +118,5 @@ function processDemo() {
   markdownMagic(markdownPath, configDemo, callback);
 }
 
-/**
- * Compiles `./docTemplates/api.md` -> `./demo/api.md`
- */
-
-// function processApiExamples() {
-//   const callback = function(updatedContent, outputConfig) {
-//     if (fs.existsSync('./demo/api.md')) {
-//       fs.readFile('./demo/api.md', 'utf8', function(err, data) {
-//         formatApiTableContents(data, './demo/api.md');
-//       });
-//     } else {
-//       console.log('ERROR: ./demo/api.md file is missing');
-//     }
-//   };
-
-//   const config = {
-//     matchWord: 'AURO-GENERATED-CONTENT',
-//     outputDir: './demo'
-//   };
-
-//   const markdownPath = path.join(__dirname, '../docs/partials/api.md');
-
-//   markdownMagic(markdownPath, config, callback);
-// }
-
-/**
- * Copy README.md template from static source
- * */
-
-// function copyReadmeLocally() {
-
-//   if (!fs.existsSync(dirDocTemplates)){
-//     fs.mkdirSync(dirDocTemplates);
-//   }
-
-//   if (!fs.existsSync(readmeFilePath)) {
-//     fs.writeFile(readmeFilePath, '', function(err) {
-//       if(err) {
-//         console.log('ERROR: Unable to create README.md file.', err);
-//       }
-//     });
-//   }
-
-//   https.get(readmeTemplateUrl, function(response) {
-//     let writeTemplate = response.pipe(fs.createWriteStream(readmeFilePath));
-
-//     writeTemplate.on('finish', () => {
-//       processReadme();
-//     });
-
-//   }).on('error', (err) => {
-//     console.log('ERROR: Unable to fetch README.md file from server.', err);
-//   });
-// }
-
-/**
- * Run all the actual document generation
- */
-// processDocParts();
-// copyReadmeLocally();
-// processApiExamples();
 processPartials();
 processDemo();
