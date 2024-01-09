@@ -1,0 +1,1 @@
+# Semantic Release Automated Changelog
