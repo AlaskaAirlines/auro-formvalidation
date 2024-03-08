@@ -3,7 +3,7 @@
 
 // ---------------------------------------------------------------------
 
-/* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers */
+/* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers, line-comment-position, no-inline-comments */
 
 export class AuroFormValidation {
 
@@ -66,7 +66,7 @@ export class AuroFormValidation {
           elem.validity = 'tooShort';
           elem.setCustomValidity = elem.setCustomValidityForType || '';
         }
-      } else if (elem.type === 'numeric') {
+      } else if (elem.type === 'number' || elem.type === 'numeric') { // 'numeric` is a deprecated alias for number'
         if (elem.max !== undefined && Number(elem.max) < Number(elem.value)) {
           elem.validity = 'rangeOverflow';
           elem.setCustomValidity = elem.getAttribute('setCustomValidityRangeOverflow') || '';
