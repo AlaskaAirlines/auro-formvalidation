@@ -10,6 +10,15 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: version
+    attributes:
+      label: Please verify the version of auro-formvalidation you have installed
+  - type: markdown
+    attributes:
+      value: >
+        [![See it on
+        NPM!](https://img.shields.io/npm/v/@aurodesignsystem/auro-formvalidation?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@aurodesignsystem/auro-formvalidation)
   - type: textarea
     id: details
     attributes:
