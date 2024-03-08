@@ -78,7 +78,7 @@ branches:
 # Labels: define labels for Issues and Pull Requests
 labels:
   - name: auro-formvalidation
-     color: 'fa23e4'
+    color: 'fa23e4'
     description:
     process: Key filter for this repo
   - name: duplicate
