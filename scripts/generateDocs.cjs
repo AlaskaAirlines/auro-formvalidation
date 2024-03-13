@@ -118,5 +118,32 @@ function processDemo() {
   markdownMagic(markdownPath, configDemo, callback);
 }
 
+/**
+ * Compiles `./docTemplates/README.md` -> `./README.md`
+ */
+
+function processReadme() {
+  const callback = function(updatedContent, outputConfig) {
+
+    if (fs.existsSync('./README.md')) {
+      fs.readFile('./README.md', 'utf8', function(err, data) {
+        formatTemplateFileContents(data, './README.md');
+      });
+    } else {
+      console.log('ERROR: ./README.md file is missing');
+    }
+  };
+
+  const config = {
+    matchWord: 'AURO-GENERATED-CONTENT',
+    outputDir: './'
+  };
+
+  const markdownPath = path.join(__dirname, '../docs/partials/README.md');
+
+  markdownMagic(markdownPath, config, callback);
+}
+
 processPartials();
 processDemo();
+processReadme();
