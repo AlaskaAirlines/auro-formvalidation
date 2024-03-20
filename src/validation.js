@@ -5,7 +5,7 @@
 
 /* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers, line-comment-position, no-inline-comments */
 
-export class AuroFormValidation {
+export default class AuroFormValidation {
 
   /**
    * Generates a camelCase version of the tag name for an element.
