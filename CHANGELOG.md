@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.0.2](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.1...v1.0.2) (2024-03-22)
+
+
+### Performance Improvements
+
+* update repo to support ESM development ([ad7cc6b](https://github.com/AlaskaAirlines/auro-formvalidation/commit/ad7cc6b4137d1da1e73c332ada7e9864beeed9a9))
+
 ## [1.0.1](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.0...v1.0.1) (2024-03-08)
 
 
