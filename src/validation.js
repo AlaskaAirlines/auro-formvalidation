@@ -5,7 +5,12 @@
 
 /* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers, line-comment-position, no-inline-comments, prefer-destructuring */
 
+import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs';
+
 export default class AuroFormValidation {
+  constructor() {
+    this.runtimeUtils = new AuroLibraryRuntimeUtils();
+  }
 
   /**
    * Determines the validity state of the element based on the common attribute restrictions (pattern).
@@ -135,7 +140,7 @@ export default class AuroFormValidation {
       if (!hasValue && elem.required) {
         elem.validity = 'valueMissing';
         elem.setCustomValidity = elem.setCustomValidityValueMissing || '';
-      } else if (elem.tagName.toLowerCase().startsWith('auro-input') || elem.hasAttribute('auro-input')) {
+      } else if (this.runtimeUtils.elementMatch(elem, 'auro-input')) {
         this.validateType(elem);
         this.validateAttributes(elem);
       }
@@ -208,7 +213,7 @@ export default class AuroFormValidation {
     if (elem.validity !== 'valid') {
       if (elem.setCustomValidity) {
         elem.errorMessage = elem.setCustomValidity;
-      } else if (elem.tagName.toLowerCase().startsWith('auro-input') || elem.hasAttribute('auro-input')) {
+      } else if (this.runtimeUtils.elementMatch(elem, 'auro-input')) {
         const input = elem.renderRoot.querySelector('input');
 
         if (input.validationMessage.length > 0) {
