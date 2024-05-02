@@ -3,13 +3,24 @@
 
 // ---------------------------------------------------------------------
 
-/* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers, line-comment-position, no-inline-comments, prefer-destructuring */
+/* eslint-disable complexity, max-depth, no-extra-parens, no-magic-numbers, line-comment-position, no-inline-comments */
 
-import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs';
+export class AuroFormValidation {
 
-export default class AuroFormValidation {
-  constructor() {
-    this.runtimeUtils = new AuroLibraryRuntimeUtils();
+  /**
+   * Generates a camelCase version of the tag name for an element.
+   * @private
+   * @param {object} elem - HTML element with tagname to convert.
+   * @returns {string} Tag name in camelCase syntax.
+   */
+  getCamelCaseName(elem) {
+    const tagName = elem.tagName.toLowerCase();
+    const tagNameDivider = tagName.indexOf('-');
+    const nameSpace = tagName.substring(0, tagNameDivider);
+    const name = tagName.slice(tagNameDivider + 1);
+    const camelCaseName = nameSpace + name.charAt(0).toUpperCase() + name.slice(1);
+
+    return camelCaseName;
   }
 
   /**
@@ -26,10 +37,10 @@ export default class AuroFormValidation {
         elem.validity = 'badInput';
         elem.setCustomValidity = elem.setCustomValidityBadInput || '';
       }
-    } else if (elem.value && elem.value.length > 0 && elem.value.length < elem.minLength) {
+    } else if (elem.value.length > 0 && elem.value.length < elem.minLength) {
       elem.validity = 'tooShort';
       elem.setCustomValidity = elem.setCustomValidityTooShort || '';
-    } else if (elem.value && elem.value.length > elem.maxLength) {
+    } else if (elem.value.length > elem.maxLength) {
       elem.validity = 'tooLong';
       elem.setCustomValidity = elem.setCustomValidityTooLong || '';
     }
@@ -71,7 +82,7 @@ export default class AuroFormValidation {
                  elem.type === 'month-fullYear' ||
                  elem.type === 'year-month-day'
       ) {
-        if (elem.value && elem.value.length > 0 && elem.value.length < elem.dateStrLength) {
+        if (elem.value.length > 0 && elem.value.length < elem.dateStrLength) {
           elem.validity = 'tooShort';
           elem.setCustomValidity = elem.setCustomValidityForType || '';
         } else {
@@ -104,15 +115,14 @@ export default class AuroFormValidation {
   /**
    * Determines the validity state of the element.
    * @param {object} elem - HTML element to validate.
-   * @param {boolean} force - Boolean that forces validation to run.
    * @returns {void}
    */
-  validate(elem, force) {
+  validate(elem) {
     this.getInputElements(elem);
     this.getAuroInputs(elem);
 
     // Validate only if noValidate is not true and the input does not have focus
-    const validationShouldRun = force || (!elem.contains(document.activeElement) && elem.value !== undefined) || elem.validateOnInput;
+    const validationShouldRun = (!elem.contains(document.activeElement) && elem.value !== undefined) || elem.validateOnInput;
 
     if (elem.hasAttribute('error')) {
       elem.validity = 'customError';
@@ -140,7 +150,7 @@ export default class AuroFormValidation {
       if (!hasValue && elem.required) {
         elem.validity = 'valueMissing';
         elem.setCustomValidity = elem.setCustomValidityValueMissing || '';
-      } else if (this.runtimeUtils.elementMatch(elem, 'auro-input')) {
+      } else if (elem.tagName.toLowerCase() === 'auro-input') {
         this.validateType(elem);
         this.validateAttributes(elem);
       }
@@ -172,12 +182,11 @@ export default class AuroFormValidation {
 
       this.getErrorMessage(elem);
 
-      elem.dispatchEvent(new CustomEvent('auroFormElement-validated', {
+      elem.dispatchEvent(new CustomEvent(`${this.getCamelCaseName(elem)}-validated`, {
         bubbles: true,
         composed: true,
         detail: {
-          validity: elem.validity,
-          message: elem.errorMessage
+          validity: elem.validity
         }
       }));
     }
@@ -200,7 +209,7 @@ export default class AuroFormValidation {
    * @returns {void}
    */
   getAuroInputs(elem) {
-    this.auroInputElements = elem.shadowRoot.querySelectorAll('auro-input, [auro-input]');
+    this.auroInputElements = elem.renderRoot.querySelectorAll('auro-input');
   }
 
   /**
@@ -211,21 +220,23 @@ export default class AuroFormValidation {
    */
   getErrorMessage(elem) {
     if (elem.validity !== 'valid') {
+      this.getAuroInputs(elem);
+
       if (elem.setCustomValidity) {
         elem.errorMessage = elem.setCustomValidity;
-      } else if (this.runtimeUtils.elementMatch(elem, 'auro-input')) {
+      } else if (elem.tagName.toLowerCase() === 'auro-input') {
         const input = elem.renderRoot.querySelector('input');
 
         if (input.validationMessage.length > 0) {
           elem.errorMessage = input.validationMessage;
         }
-      } else if (this.inputElements && this.inputElements.length > 0) {
-        const firstInput = this.inputElements[0];
+      } else if (this.auroInputElements && this.auroInputElements.length > 0) {
+        const firstInput = this.auroInputElements[0].renderRoot.querySelector('input');
 
         if (firstInput.validationMessage.length > 0) {
           elem.errorMessage = firstInput.validationMessage;
-        } else if (this.inputElements.length === 2) {
-          const secondInput = this.inputElements[1];
+        } else if (this.auroInputElements.length === 2) {
+          const secondInput = this.auroInputElements[1].renderRoot.querySelector('input');
 
           if (secondInput.validationMessage.length > 0) {
             elem.errorMessage = secondInput.validationMessage;
@@ -235,5 +246,13 @@ export default class AuroFormValidation {
     } else {
       elem.errorMessage = undefined;
     }
+
+    elem.dispatchEvent(new CustomEvent(`${this.getCamelCaseName(elem)}-helpText`, {
+      bubbles: true,
+      composed: true,
+      detail: {
+        message: this.errorMessage
+      }
+    }));
   }
 }
