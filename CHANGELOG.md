@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.0.3](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.2...v1.0.3) (2024-05-02)
+
+
+### Performance Improvements
+
+* **release:** minor doc change to force release action ([8e599d4](https://github.com/AlaskaAirlines/auro-formvalidation/commit/8e599d41ed9eb8d3a22b01a52abbb902709ccd2a))
+
 ## [1.0.2](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.1...v1.0.2) (2024-03-22)
 
 
