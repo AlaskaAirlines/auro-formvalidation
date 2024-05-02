@@ -71,7 +71,7 @@
     "build:api": "wca analyze 'src/validation.js' --outFiles docs/api.md",
     "dist:js": "copyfiles -u 1 -V './src/**/*.js' ./dist",
     "esLint": "./node_modules/.bin/eslint src/**/*.js",
-    "lint": "npm run esLint",
+    "linters": "npm run esLint",
     "preCommit": "node scripts/pre-commit.mjs",
     "postinstall": "node packageScripts/postinstall.mjs",
     "prepare": "husky install",
