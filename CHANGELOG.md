@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.0.4](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.3...v1.0.4) (2024-10-09)
+
+
+### Bug Fixes
+
+* moves auro library to dependencies in package.json [#18](https://github.com/AlaskaAirlines/auro-formvalidation/issues/18) ([673d3d7](https://github.com/AlaskaAirlines/auro-formvalidation/commit/673d3d7a57d44bdd195e2ac7cfdf9942b8a120d8))
+
 ## [1.0.3](https://github.com/AlaskaAirlines/auro-formvalidation/compare/v1.0.2...v1.0.3) (2024-05-02)
 
 
