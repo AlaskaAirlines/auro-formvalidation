@@ -1,11 +1,5 @@
-export class AuroFormValidation {
-    /**
-     * Generates a camelCase version of the tag name for an element.
-     * @private
-     * @param {object} elem - HTML element with tagname to convert.
-     * @returns {string} Tag name in camelCase syntax.
-     */
-    private getCamelCaseName;
+export default class AuroFormValidation {
+    runtimeUtils: any;
     /**
      * Determines the validity state of the element based on the common attribute restrictions (pattern).
      * @private
@@ -23,9 +17,10 @@ export class AuroFormValidation {
     /**
      * Determines the validity state of the element.
      * @param {object} elem - HTML element to validate.
+     * @param {boolean} force - Boolean that forces validation to run.
      * @returns {void}
      */
-    validate(elem: object): void;
+    validate(elem: object, force: boolean): void;
     /**
      * Gets all the HTML5 `inputs` in the element shadow DOM.
      * @private
